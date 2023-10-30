@@ -1,16 +1,30 @@
 package com.example.employees;
 
-public class EmployeeManager {
-    private Employees[] employees = new Employees[4];;
+import org.springframework.stereotype.Repository;
 
-    public EmployeeManager() {
-        employees[0] = new Employees("E001", "John", "Doe", "john.doe@example.com", "Software Engineer");
-        employees[1] = new Employees("E002", "Jane", "Smith", "jane.smith@example.com", "Product Manager");
-        employees[2] = new Employees("E003", "Bob", "Johnson", "bob.johnson@example.com", "Data Analyst");
-        employees[3] = new Employees("E004", "Alice", "Williams", "alice.williams@example.com", "UX Designer");
+@Repository
+public class EmployeeManager {
+
+    private static Employees list = new Employees();
+
+    // Manually initialize service to contain some employees
+    static {
+        Employee employee1 = new Employee("E001", "John", "Doe", "john.doe@example.com", "Software Engineer");
+        Employee employee2 = new Employee("E002", "Jane", "Smith", "jane.smith@example.com", "Product Manager");
+        Employee employee3 = new Employee("E003", "Bob", "Johnson", "bob.johnson@example.com", "Data Analyst");
+        Employee employee4 = new Employee("E004", "Alice", "Williams", "alice.williams@example.com", "UX Designer");
+
+        list.getEmployeeList().add(employee1);
+        list.getEmployeeList().add(employee2);
+        list.getEmployeeList().add(employee3);
+        list.getEmployeeList().add(employee4);
     }
 
-    public Employees[] getEmployees() {
-        return employees;
+    public Employees getAllEmployees() {
+        return list;
+    }
+
+    public void addEmployee(Employee employee) {
+        list.getEmployeeList().add(employee);
     }
 }
